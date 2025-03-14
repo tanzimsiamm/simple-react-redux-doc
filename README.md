@@ -234,16 +234,6 @@ function App() {
 export default App;
 ```
 
-## Deployment
-
-This project can be deployed to platforms like **Netlify**, **Vercel**, or **GitHub Pages**.
-
-### Build the project:
-
-```bash
-npm run build
-```
-
 ## RTK Query for API Integration
 
 RTK Query is a powerful data-fetching and caching tool built into Redux Toolkit. It simplifies handling API calls.
@@ -300,6 +290,17 @@ function App() {
 
 export default App;
 ```
+
+## Deployment
+
+This project can be deployed to platforms like **Netlify**, **Vercel**, or **GitHub Pages**.
+
+### Build the project:
+
+```bash
+npm run build
+```
+
 
 ## Project Ideas
 
