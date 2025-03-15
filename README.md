@@ -1,4 +1,3 @@
-
 # React Project
 
 A comprehensive guide to setting up and working with **React** and **Redux** for building modern web applications. This repository demonstrates key concepts like state management, routing, API integration, and deployment for a scalable React application.
@@ -8,6 +7,7 @@ A comprehensive guide to setting up and working with **React** and **Redux** for
 React is a popular JavaScript library for building **User Interfaces (UI)**. It allows developers to create reusable components, making code more organized, clean, and maintainable.
 
 ### Key Features of React:
+
 - **Component-based Architecture**: The UI is divided into smaller components.
 - **Virtual DOM**: React optimizes performance by using a Virtual DOM.
 - **One-Way Data Binding**: Data flows in one direction, which simplifies debugging.
@@ -40,8 +40,9 @@ npm install react-router-dom @reduxjs/toolkit react-redux
 There are two types of components in React:
 
 1. **Functional Component**:
+
    ```jsx
-   import React from 'react';
+   import React from "react";
 
    function Welcome() {
      return <h1>Hello React!</h1>;
@@ -51,8 +52,9 @@ There are two types of components in React:
    ```
 
 2. **Class Component** (Older approach, rarely used now):
+
    ```jsx
-   import React, { Component } from 'react';
+   import React, { Component } from "react";
 
    class Welcome extends Component {
      render() {
@@ -68,7 +70,7 @@ There are two types of components in React:
 - **State**: State is used to manage data within a component. Here's an example of a `useState` hook in a functional component:
 
   ```jsx
-  import { useState } from 'react';
+  import { useState } from "react";
 
   function Counter() {
     const [count, setCount] = useState(0);
@@ -105,14 +107,16 @@ React Hooks allow functional components to use state and lifecycle features.
 The `useEffect` hook allows side effects in functional components, like data fetching:
 
 ```jsx
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 function DataFetching() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
       const result = await response.json();
       setData(result);
     };
@@ -122,7 +126,7 @@ function DataFetching() {
 
   return (
     <ul>
-      {data.map(item => (
+      {data.map((item) => (
         <li key={item.id}>{item.title}</li>
       ))}
     </ul>
@@ -147,7 +151,12 @@ npm install react-router-dom
 Here’s how to set up routing with React Router v6+:
 
 ```jsx
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Link,
+  Outlet,
+} from "react-router-dom";
 
 function Home() {
   return <h1>Home Page</h1>;
@@ -157,19 +166,31 @@ function About() {
   return <h1>About Page</h1>;
 }
 
-function App() {
+function Layout() {
   return (
-    <Router>
+    <>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
       </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
+      <Outlet />
+    </>
   );
+}
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "", element: <Home /> },
+      { path: "about", element: <About /> },
+    ],
+  },
+]);
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;
@@ -188,15 +209,15 @@ npm install @reduxjs/toolkit react-redux
 ### Setting Up Redux Store
 
 ```jsx
-import { configureStore } from '@reduxjs/toolkit';
-import { Provider, useSelector, useDispatch } from 'react-redux';
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider, useSelector, useDispatch } from "react-redux";
 
 const initialState = {
   count: 0,
 };
 
 const counterSlice = {
-  name: 'counter',
+  name: "counter",
   initialState,
   reducers: {
     increment: (state) => {
@@ -218,7 +239,9 @@ function Counter() {
   return (
     <div>
       <h1>{count}</h1>
-      <button onClick={() => dispatch(counterSlice.actions.increment())}>Increase</button>
+      <button onClick={() => dispatch(counterSlice.actions.increment())}>
+        Increase
+      </button>
     </div>
   );
 }
@@ -247,15 +270,17 @@ npm install @reduxjs/toolkit react-redux
 ### Example:
 
 ```jsx
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { configureStore } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { configureStore } from "@reduxjs/toolkit";
 
 const api = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com' }),
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://jsonplaceholder.typicode.com",
+  }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => '/posts',
+      query: () => "/posts",
     }),
   }),
 });
@@ -281,7 +306,7 @@ function App() {
 
   return (
     <ul>
-      {data.map(item => (
+      {data.map((item) => (
         <li key={item.id}>{item.title}</li>
       ))}
     </ul>
@@ -300,7 +325,6 @@ This project can be deployed to platforms like **Netlify**, **Vercel**, or **Git
 ```bash
 npm run build
 ```
-
 
 ## Project Ideas
 
