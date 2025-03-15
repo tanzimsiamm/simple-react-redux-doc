@@ -148,7 +148,7 @@ npm install react-router-dom
 
 ### Example
 
-Here’s how to set up routing with React Router v6+:
+Here’s how to set up routing with React Router :
 
 ```jsx
 import {
